@@ -1,3 +1,10 @@
+execute pathogen#infect()
+
+
+"plugins settings
+map <C-t> :NERDTreeToggle<CR>
+set laststatus=2    
+
 "set preferences
 set incsearch
 set number
@@ -8,6 +15,7 @@ set tabstop=4
 syntax on
 filetype on
 filetype plugin on
+set ruler
 
 
 "leader key
@@ -15,8 +23,7 @@ inoremap <leader>ln <ESC>:call NumberToggle()<cr>
 inoremap <leader>q <ESC>:wq<cr>
 nnoremap <leader>q <ESC>:wq<cr>
 vnoremap <leader>q <ESC>:wq<cr>
-inoremap <leader>s <ESC>:w<cr>
-nnoremap <leader>s <ESC>:w<cr>
+nnoremap <leader>s :w<cr>
 vnoremap <leader>s <ESC>:w<cr>
 inoremap <leader>' ''<ESC>i
 inoremap <leader>" ""<ESC>i
@@ -29,11 +36,15 @@ inoremap <leader>s <ESC>:w<cr>
 inoremap <leader>] <ESC>
 inoremap <leader>m <ESC>:w<CR>:!make<CR>
 
+
+"remove conflicting keystrokes'
+nnoremap s <ESC>:w<CR>
+
 "hotkeys"
-no <down> ddp
-no <up>	   ddkP
-no <right> <Nop>
-no <left> <Nop>
+no <down>   10j
+no <up>	    10k
+no <right> <ESC>:tabnext<CR>
+no <left> <ESC>:tabprev<CR>
 imap <C-n> :call NumberToggle()<cr>
 nmap <C-n> :call NumberToggle()<cr>
 nnoremap  <C-s> :w<CR>
