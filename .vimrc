@@ -17,7 +17,6 @@ set wildmenu
 set wildmode=list:longest,full
 set lazyredraw
 "folding preferences"
-set foldtext
 set foldmethod=marker
 syntax on
 filetype on
@@ -38,11 +37,16 @@ vnoremap <leader>q <ESC>:wq<cr>
 inoremap <leader>w <ESC>:w<cr>
 nnoremap <leader>w :w<cr>
 vnoremap <leader>w <ESC>:w<cr>
+"insert folding symbols"
+inoremap <leader>sf {{{
+inoremap <leader>ef }}}
+nnoremap <leader>fb %a//end fold }}}<ESC>0%ko//start fold {{{<ESC>za
 "open up nerd tree for file nav"
 nnoremap <leader>t :NERDTreeToggle<CR>
 inoremap <leader>t :NERDTreeToggle<CR>
 vnoremap <leader>t :NERDTreeToggle<CR>
 "esc and save customization"
+inoremap jk    <ESC>:w<CR>
 inoremap <leader>[ <ESC>:w<CR>
 inoremap  <leader>] <ESC>
 vnoremap  <leader>] <ESC>
@@ -52,8 +56,11 @@ inoremap <leader>m <ESC>:w<CR>:!make<CR>
 inoremap ( ()<ESC>i
 inoremap [ []<ESC>i
 inoremap { {}<ESC>i<CR><CR><ESC>ki<TAB>
+inoremap <leader>{ {
 inoremap ' ''<ESC>i
 inoremap " ""<ESC>i
+nnoremap ; :
+vnoremap ; :
 "set 0 to go the the first non blank of line"
 noremap 0 ^
 "remove the highlighting from the last search"
@@ -65,7 +72,9 @@ nnoremap <leader>ev :tabnew $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 "encase the current word in double quotes"
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
-
+"hot key to prototype c function under Prototype header"
+inoremap <leader>pf <ESC>mayy/Prototypes<CR>)kpA;<ESC>`a
+nnoremap <leader>pf mayy/Prototypes<CR>)kpA;<ESC>`a
 "****************************************************"
 "******************* OVERWRITE KEYS *****************
 "hotkeys"
@@ -73,10 +82,6 @@ nnoremap <down>   10j
 nnoremap <up>	    10k
 nnoremap <right> <ESC>:tabnext<CR>
 nnoremap <left> <ESC>:tabprev<CR>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <ESC>:tabprev<CR>
-inoremap <right> <ESC>:tabnext<CR>
 
 "*****************************************************"
 "*********************** SNIPPETS ********************
