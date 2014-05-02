@@ -37,6 +37,10 @@ vnoremap <leader>q <ESC>:wq<cr>
 inoremap <leader>w <ESC>:w<cr>
 nnoremap <leader>w :w<cr>
 vnoremap <leader>w <ESC>:w<cr>
+"open new file in window"
+inoremap <leader>o <ESC>:tabnew<cr>
+nnoremap <leader>o :tabnew<cr>
+vnoremap <leader>o :tabnew<cr>
 "insert folding symbols"
 inoremap <leader>sf {{{
 inoremap <leader>ef }}}
@@ -87,8 +91,6 @@ nnoremap <left> <ESC>:tabprev<CR>
 "*********************** SNIPPETS ********************
 "abbreviations ie snippets
 abbr inc #include< ><ESC>i
-abbr for for(i=0; i<10; i++<ESC>o{<ESC>i<cr><cr><ESC>ki<TAB>
-
 
 "functions
 function! NumberToggle()
