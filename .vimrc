@@ -94,12 +94,12 @@ abbr inc #include< ><ESC>i
 
 "functions
 function! NumberToggle()
-  if(&relativenumber == 1)
-      set number
-      set relativenumber!
-  else
-set relativenumber
-  endif
+    if(&relativenumber == 1)
+        set number
+        set relativenumber!
+    else
+        set relativenumber
+    endif
 endfunc
 
 if $COLORTERM == 'gnome-terminal'
