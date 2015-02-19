@@ -2,7 +2,6 @@ execute pathogen#infect()
 
 "***************************************************"
 "******************* PREFERENCES *******************
-"
 "plugins settings
 set numberwidth=1
 set laststatus=2
@@ -22,7 +21,6 @@ syntax on
 filetype on
 filetype plugin on
 set ruler
-
 "******************************************************
 "******************MAPPINGS****************************
 "leader key
@@ -45,10 +43,15 @@ vnoremap <leader>o :tabnew<cr>
 inoremap <leader>sf {{{
 inoremap <leader>ef }}}
 nnoremap <leader>fb %a//end fold }}}<ESC>0%ko//start fold {{{<ESC>za
+""--------------------------------------MAPPINGS FOR PLUGINS-------------
+"gundo visual undo tree"
+nnoremap <leader>u :GundoToggle<CR>
+inoremap <leader>u :GundoToggle<CR>
+vnoremap <leader>u :GundoToggle<CR>
 "open up nerd tree for file nav"
-nnoremap <leader>t :NERDTreeToggle<CR>
-inoremap <leader>t :NERDTreeToggle<CR>
-vnoremap <leader>t :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
+inoremap <leader>n :NERDTreeToggle<CR>
+vnoremap <leader>n :NERDTreeToggle<CR>
 "esc and save customization"
 inoremap jk    <ESC>:w<CR>
 inoremap <leader>[ <ESC>:w<CR>
@@ -70,15 +73,19 @@ noremap 0 ^
 "remove the highlighting from the last search"
 noremap <silent> <leader><cr> :noh<cr>
 "pull up a copy of current learningvim"
-nnoremap <leader>lv :tabnew ~/xdev/learn.txt<CR>
+nnoremap <leader>lv :tabnew ~/.vim/learnvim.txt<CR>
+nnoremap <leader>lt :tabnew ~/.vim/learntmux.txt<CR>
+"quick edit for the tmux file"
+nnoremap <leader>et :tabnew ~/.tmux.conf<cr>
+nnoremap <leader>st :source ~/.tmux.conf<cr>
 "quick edit for the vimrc file"
 nnoremap <leader>ev :tabnew $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 "encase the current word in double quotes"
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 "hot key to prototype c function under Prototype header"
-inoremap <leader>pf <ESC>mayy/Prototypes<CR>)kpA;<ESC>`a
-nnoremap <leader>pf mayy/Prototypes<CR>)kpA;<ESC>`a
+inoremap <leader>pf :call CPrototypeFunction()<CR>
+nnoremap <leader>pf :call CPrototypeFunction()<CR>
 "****************************************************"
 "******************* OVERWRITE KEYS *****************
 "hotkeys"
@@ -91,7 +98,6 @@ nnoremap <left> <ESC>:tabprev<CR>
 "*********************** SNIPPETS ********************
 "abbreviations ie snippets
 abbr inc #include< ><ESC>i
-
 "functions
 function! NumberToggle()
     if(&relativenumber == 1)
@@ -106,9 +112,29 @@ if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
 
+autocmd BufWrite * :call DeleteTrailingWS()
 func! DeleteTrailingWS()
         exe "normal mz"
         %s/\s\+$//ge
         exe "normal `z"
 endfunc
-autocmd BufWrite * :call DeleteTrailingWS()
+autocmd BufNewFile Makefile :call ChangeTabs()
+func! ChangeTabs()
+	set expandtab!
+endfunc
+autocmd BufNewFile *.c 0r ~/.vim/templates/skeleton.c
+autocmd BufNewFile *.h 0r ~/.vim/templates/skeleton.h
+autocmd BufNewFile *.c,*.h :call TimeCreatedStamp()
+func! TimeCreatedStamp()
+        exe "normal mi"
+        %s/taimilolotonga/\=strftime("%c")/
+        exe "normal 'i"
+endfunc
+func! CPrototypeFunction()
+let temp = @@
+    exe "normal! mayy"
+    exe "normal! /Prototypes\<CR>"
+    exe "normal! )kpA;\<ESC>"
+    exe "normal! 'a"
+let @@ = temp
+endfunc
