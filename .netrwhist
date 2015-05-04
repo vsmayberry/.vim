@@ -1,4 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =3
 let g:netrw_dirhist_1='/home/virgil/xdev/c/fluidflow'
 let g:netrw_dirhist_2='/home/virgil/xdev/OpenFOAM-2.2.x/src/transportModels/incompressible/transportModel'
+let g:netrw_dirhist_3='/home/vsmayberry/xdev/c'
