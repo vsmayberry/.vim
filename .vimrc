@@ -5,6 +5,7 @@ execute pathogen#infect()
 "plugins settings
 set numberwidth=1
 set laststatus=2
+set sw=4
 :"set preferences
 set incsearch
 set number
